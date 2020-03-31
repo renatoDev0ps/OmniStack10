@@ -1,8 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const routes = require('./routes');
 
 const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(routes);
 
 mongoose.connect('mongodb://root:mongodb@localhost:27017/week10?authSource=admin', {
   useUnifiedTopology: true,
@@ -11,7 +16,4 @@ mongoose.connect('mongodb://root:mongodb@localhost:27017/week10?authSource=admin
   useCreateIndex: true
 });
 
-app.use(express.json());
-app.use(routes);
-
-app.listen(3332);
+app.listen(3333);

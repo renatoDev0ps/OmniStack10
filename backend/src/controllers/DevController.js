@@ -37,5 +37,11 @@ module.exports = {
     }
   
     return response.json(dev);
-  }
+  },
+
+  async update(request, response) {
+    const dev = await Dev.findByIdAndUpdate(request.params._id, request.body, { new: true });
+
+    return response.json(dev);
+  },
 };
