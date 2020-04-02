@@ -1,9 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const http = require('http');
 const routes = require('./routes');
+const { setupWebsocket } = require('./websocket');
 
 const app = express();
+const server = http.Server(app);
+
+setupWebsocket(server);
 
 app.use(cors());
 app.use(express.json());
@@ -16,4 +21,4 @@ mongoose.connect('mongodb://root:mongodb@localhost:27017/week10?authSource=admin
   useCreateIndex: true
 });
 
-app.listen(3333);
+server.listen(3333);
